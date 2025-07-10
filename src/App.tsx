@@ -6,10 +6,12 @@ import Skills from "./Sections/Skills";
 import Projects from "./Sections/Projects";
 
 import Contact from "./Sections/Contact";
+import { DiVim } from "react-icons/di";
 
 export default function App() {
   return (
-    <div className="w-screen max-h-screen">
+    <div>
+      <Navbar/>
       
       <Hero />
       <About />
