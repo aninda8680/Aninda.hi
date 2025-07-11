@@ -1,4 +1,4 @@
-import { BackgroundBeamsWithCollision } from "../components/ui/background-beams-with-collision";
+
 import { motion } from "framer-motion";
 import type { Variants } from "framer-motion";
 
@@ -32,9 +32,9 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className="min-h-screen w-full bg-[#1e1e1e] text-[#d4d4d4] font-mono relative overflow-hidden"
+      className=" min-h-screen w-screen flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden"
     >
-      <BackgroundBeamsWithCollision>
+
         <div className="max-w-7xl mx-auto px-4 min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 py-12">
           {/* Left Column - Text Content */}
           <motion.div
@@ -198,7 +198,7 @@ Game Output:
             </div>
           </motion.div>
         </div>
-      </BackgroundBeamsWithCollision>
+
     </section>
   );
 }

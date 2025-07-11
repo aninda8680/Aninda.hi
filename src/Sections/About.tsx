@@ -18,10 +18,7 @@ export default function About() {
   return (
     <section id="about" className=" min-h-screen w-screen flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
 
-      {/* Animated grid background */}
-      <div>
-        
-      </div>
+     
 
       <div className="max-w-7xl  grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
         {/* Left Column - About Me Heading and Whoami Box */}
