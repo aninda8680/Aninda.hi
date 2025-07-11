@@ -1,24 +1,19 @@
-// Navbar.tsx
 import { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Code2, TerminalSquare, Bug, GitBranch, Cpu } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Hero from '@/Sections/Hero';
-import Skills from '@/Sections/Skills';
-import About from '@/Sections/About';
-import Projects from '@/Sections/Projects';
-import Contact from '@/Sections/Contact';
 
 const navItems = [
-  { id: 'home', label: 'Home' },
-  { id: 'about', label: 'About' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'hero', label: 'Home', icon: <TerminalSquare className="w-5 h-5" /> },
+  { id: 'about', label: 'About', icon: <Code2 className="w-5 h-5" /> },
+  { id: 'skills', label: 'Skills', icon: <Cpu className="w-5 h-5" /> },
+  { id: 'projects', label: 'Projects', icon: <GitBranch className="w-5 h-5" /> },
+  { id: 'contact', label: 'Contact', icon: <Bug className="w-5 h-5" /> },
 ];
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
+  const [scrolled, setScrolled] = useState(false);
 
   const toggleMenu = () => setIsMenuOpen(!isMenuOpen);
 
@@ -32,6 +27,8 @@ const Navbar = () => {
 
   useEffect(() => {
     const handleScroll = () => {
+      setScrolled(window.scrollY > 10);
+
       const current = navItems.find(({ id }) => {
         const el = document.getElementById(id);
         if (el) {
@@ -40,6 +37,7 @@ const Navbar = () => {
         }
         return false;
       });
+
       if (current) setActiveSection(current.id);
     };
 
@@ -63,16 +61,15 @@ const Navbar = () => {
       </AnimatePresence>
 
       {/* Navbar */}
-      <nav className=" top-0 w-screen z-50 bg-black backdrop-blur-md px-6 py-2 shadow-xl">
+      <nav
+        className={`fixed top-0 left-0 w-full z-50 px-6 shadow-xl transition-all duration-300 ease-in-out
+        ${scrolled ? 'bg-black/60 backdrop-blur-md py-2' : 'bg-transparent py-4'}`}
+      >
         <div className="max-w-5xl mx-auto flex justify-between items-center">
           {/* Logo */}
-          <motion.div
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 0.8 }}
-            className="text-xl font-bold text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text drop-shadow"
-          >
-            Aninda.dev
-          </motion.div>
+          <div className="text-xl font-bold text-transparent bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text drop-shadow font-mono tracking-tight">
+            Aninda
+          </div>
 
           {/* Desktop Nav */}
           <div className="hidden md:flex space-x-6 items-center">
@@ -83,9 +80,12 @@ const Navbar = () => {
                 initial={{ opacity: 0, y: -10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="group relative text-gray-200 hover:text-white px-1 py-1 transition duration-300 font-medium cursor-pointer"
+                className="group relative text-gray-200 hover:text-white px-2 py-1 transition duration-300 font-medium cursor-pointer"
               >
-                {item.label}
+                <div className="flex items-center gap-2">
+                  <span className="opacity-80">{item.icon}</span>
+                  {item.label}
+                </div>
                 <span
                   className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-blue-400 to-purple-500 transition-all duration-300 ${
                     activeSection === item.id ? 'w-full' : 'w-0 group-hover:w-full'

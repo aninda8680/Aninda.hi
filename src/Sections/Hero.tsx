@@ -34,9 +34,9 @@ export default function Hero() {
 
   return (
     <section 
-     id="Hero"
-     className=" dark w-screen bg-black text-white">
-      <BackgroundBeamsWithCollision className="w-screen">
+     id="hero"
+     className="min-h-screen dark w-full bg-black text-white relative overflow-hidden">
+      <BackgroundBeamsWithCollision>
         <div className="pt-20 max-w-2xl mx-auto p-4 min-h-[70vh] flex flex-col justify-center">
           <motion.div
             initial="hidden"

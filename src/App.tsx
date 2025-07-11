@@ -11,13 +11,15 @@ import { DiVim } from "react-icons/di";
 export default function App() {
   return (
     <div>
-      <Navbar/>
       
-      <Hero />
+      <Navbar/>
+      <Hero/>
+      
       <About />
       <Skills />
       <Projects />
       <Contact />
+      
     </div>
   );
 }

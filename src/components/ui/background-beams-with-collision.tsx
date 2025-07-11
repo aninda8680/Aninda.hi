@@ -1,4 +1,5 @@
 "use client";
+
 import { cn } from "@/lib/utils";
 import { motion, AnimatePresence } from "motion/react";
 import React, { useRef, useState, useEffect } from "react";
@@ -14,65 +15,28 @@ export const BackgroundBeamsWithCollision = ({
   const parentRef = useRef<HTMLDivElement>(null);
 
   const beams = [
-    {
-      initialX: 10,
-      translateX: 10,
-      duration: 7,
-      repeatDelay: 3,
-      delay: 2,
-    },
-    {
-      initialX: 600,
-      translateX: 600,
-      duration: 3,
-      repeatDelay: 3,
-      delay: 4,
-    },
-    {
-      initialX: 100,
-      translateX: 100,
-      duration: 7,
-      repeatDelay: 7,
-      className: "h-6",
-    },
-    {
-      initialX: 400,
-      translateX: 400,
-      duration: 5,
-      repeatDelay: 14,
-      delay: 4,
-    },
-    {
-      initialX: 800,
-      translateX: 800,
-      duration: 11,
-      repeatDelay: 2,
-      className: "h-20",
-    },
-    {
-      initialX: 1000,
-      translateX: 1000,
-      duration: 4,
-      repeatDelay: 2,
-      className: "h-12",
-    },
-    {
-      initialX: 1200,
-      translateX: 1200,
-      duration: 6,
-      repeatDelay: 4,
-      delay: 2,
-      className: "h-6",
-    },
+    { initialX: 10, translateX: 10, duration: 7, repeatDelay: 3, delay: 2, className: "h-16" },
+    { initialX: 600, translateX: 600, duration: 3, repeatDelay: 3, delay: 4, className: "h-20" },
+    { initialX: 100, translateX: 100, duration: 7, repeatDelay: 7, className: "h-24" },
+    { initialX: 400, translateX: 400, duration: 5, repeatDelay: 14, delay: 4, className: "h-20" },
+    { initialX: 800, translateX: 800, duration: 11, repeatDelay: 2, className: "h-32" },
+    { initialX: 1000, translateX: 1000, duration: 4, repeatDelay: 2, className: "h-28" },
+  
+    // Additional beams with increased height
+    { initialX: 200, translateX: 200, duration: 6, repeatDelay: 5, delay: 1, className: "h-24" },
+    { initialX: 720, translateX: 720, duration: 9, repeatDelay: 3, delay: 2, className: "h-20" },
+    { initialX: 300, translateX: 300, duration: 5, repeatDelay: 6, className: "h-28" },
+    { initialX: 900, translateX: 900, duration: 8, repeatDelay: 4, delay: 3, className: "h-16" },
+    { initialX: 50, translateX: 50, duration: 10, repeatDelay: 7, delay: 0.5, className: "h-24" },
   ];
+  
+  
 
   return (
     <div
       ref={parentRef}
       className={cn(
-        "h-96 md:h-[40rem] bg-gradient-to-b from-white to-neutral-100 dark:from-neutral-950 dark:to-neutral-800 relative flex items-center w-full justify-center overflow-hidden",
-        // h-screen if you want bigger
-        className
+        "h-96 md:h-[45.5rem] bg-transparent relative flex items-center w-full justify-center overflow-hidden"
       )}
     >
       {beams.map((beam) => (
@@ -85,14 +49,9 @@ export const BackgroundBeamsWithCollision = ({
       ))}
 
       {children}
-      <div
-        ref={containerRef}
-        className="absolute bottom-0 bg-neutral-100 w-full inset-x-0 pointer-events-none"
-        style={{
-          boxShadow:
-            "0 0 24px rgba(34, 42, 53, 0.06), 0 1px 1px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(34, 42, 53, 0.04), 0 0 4px rgba(34, 42, 53, 0.08), 0 16px 68px rgba(47, 48, 55, 0.05), 0 1px 0 rgba(255, 255, 255, 0.1) inset",
-        }}
-      ></div>
+
+      {/* Invisible containerRef for collision detection only */}
+      <div ref={containerRef} className="absolute bottom-0 w-full h-1 pointer-events-none bg-transparent" />
     </div>
   );
 };
@@ -100,8 +59,8 @@ export const BackgroundBeamsWithCollision = ({
 const CollisionMechanism = React.forwardRef<
   HTMLDivElement,
   {
-    containerRef: React.RefObject<HTMLDivElement>;
-    parentRef: React.RefObject<HTMLDivElement>;
+    containerRef: React.RefObject<HTMLDivElement | null>;
+    parentRef: React.RefObject<HTMLDivElement | null>;
     beamOptions?: {
       initialX?: number;
       translateX?: number;
@@ -116,12 +75,9 @@ const CollisionMechanism = React.forwardRef<
   }
 >(({ parentRef, containerRef, beamOptions = {} }, ref) => {
   const beamRef = useRef<HTMLDivElement>(null);
-  const [collision, setCollision] = useState<{
-    detected: boolean;
-    coordinates: { x: number; y: number } | null;
-  }>({
+  const [collision, setCollision] = useState({
     detected: false,
-    coordinates: null,
+    coordinates: null as { x: number; y: number } | null,
   });
   const [beamKey, setBeamKey] = useState(0);
   const [cycleCollisionDetected, setCycleCollisionDetected] = useState(false);
@@ -139,26 +95,21 @@ const CollisionMechanism = React.forwardRef<
         const parentRect = parentRef.current.getBoundingClientRect();
 
         if (beamRect.bottom >= containerRect.top) {
-          const relativeX =
-            beamRect.left - parentRect.left + beamRect.width / 2;
+          const relativeX = beamRect.left - parentRect.left + beamRect.width / 2;
           const relativeY = beamRect.bottom - parentRect.top;
 
           setCollision({
             detected: true,
-            coordinates: {
-              x: relativeX,
-              y: relativeY,
-            },
+            coordinates: { x: relativeX, y: relativeY },
           });
           setCycleCollisionDetected(true);
         }
       }
     };
 
-    const animationInterval = setInterval(checkCollision, 50);
-
-    return () => clearInterval(animationInterval);
-  }, [cycleCollisionDetected, containerRef]);
+    const interval = setInterval(checkCollision, 50);
+    return () => clearInterval(interval);
+  }, [cycleCollisionDetected]);
 
   useEffect(() => {
     if (collision.detected && collision.coordinates) {

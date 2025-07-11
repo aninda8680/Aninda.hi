@@ -1,4 +1,4 @@
-'use client';
+
 
 import { motion } from 'framer-motion';
 import { Gamepad2, Camera, BookText, Sparkles, Code, Flame, Cpu, Terminal, Database, Smartphone } from 'lucide-react';
@@ -16,29 +16,14 @@ export default function About() {
   ];
 
   return (
-    <section
-      id="about"
-      className="relative h-screen w-screen flex items-center justify-center px-8 py-20 bg-gray-950 overflow-hidden"
-    >
+    <section id="about" className=" min-h-screen w-screen flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
+
       {/* Animated grid background */}
-      <div className="absolute inset-0 overflow-hidden opacity-20">
-        {[...Array(20)].map((_, i) => (
-          <motion.div
-            key={i}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 0.3, 0] }}
-            transition={{ duration: 2 + Math.random() * 3, repeat: Infinity, delay: Math.random() * 2 }}
-            className="absolute w-0.5 h-0.5 bg-cyan-400 rounded-full"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              boxShadow: '0 0 8px 2px rgba(34, 211, 238, 0.8)'
-            }}
-          />
-        ))}
+      <div>
+        
       </div>
 
-      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+      <div className="max-w-7xl  grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
         {/* Left Column - About Me Heading and Whoami Box */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -147,7 +132,7 @@ export default function About() {
             animate={{ opacity: [0, 1, 0] }}
             transition={{ repeat: Infinity, duration: 1.5 }}
           >
-            <span>explore more</span>
+            <span>exploring more !!!!</span>
             <div className="w-2 h-4 bg-cyan-400 animate-pulse"></div>
           </motion.div>
         </motion.div>
