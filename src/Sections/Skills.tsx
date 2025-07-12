@@ -1,7 +1,7 @@
 "use client";
 import { motion } from "framer-motion";
 import { CodeBracketIcon, TerminalIcon, DatabaseIcon, CpuChipIcon, PaintBrushIcon } from "../Sections/icons";
-import { SnakeGame } from "./SnakeGame"; // Adjust path as needed
+import { SnakeGame } from "./SnakeGame";
 
 const categories = [
   {
@@ -43,75 +43,78 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="min-h-screen w-full overflow-x-hidden overflow-x-hidden flex items-center bg-gray-950 overflow-hidden px-6 py-12">
-      <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
+    <section 
+      id="skills" 
+      className=" w-full overflow-x-hidden bg-gray-950 px-4 sm:px-6 py-12"
+    >
+      <div className="max-w-7xl mx-auto w-full flex flex-col lg:flex-row items-start gap-8 lg:gap-12">
         {/* Left Column - Text Content */}
-<motion.div 
-  className="w-full lg:w-1/2"
-  initial={{ opacity: 0, x: -50 }}
-  whileInView={{ opacity: 1, x: 0 }}
-  transition={{ duration: 0.8 }}
->
-  <div className="text-left mb-12">
-    <motion.h1
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "backOut" }}
-      className="text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600"
-    >
-      <span className="text-gray-400">&lt;</span>my_skills<span className="text-gray-400"> /&gt;</span>
-    </motion.h1>
+        <motion.div 
+          className="w-full lg:w-2/5 xl:w-1/2"
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <div className="text-left mb-8 lg:mb-12">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: "backOut" }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-blue-600"
+            >
+              <span className="text-gray-400">&lt;</span>my_skills<span className="text-gray-400"> /&gt;</span>
+            </motion.h1>
 
-    <motion.div
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.3, duration: 0.8 }}
-      className="text-gray-400 text-lg mb-8 font-mono"
-    >
-      <div className="flex items-center mb-2">
-        <span className="text-green-400 mr-2">$</span>
-        <span>python --version</span>
-      </div>
-      <div className="text-cyan-300 ml-4">Python 3.11.4</div>
-      
-      <div className="flex items-center mt-4 mb-2">
-        <span className="text-green-400 mr-2">$</span>
-        <span>cat skills.txt | grep -E "python|react|firebase"</span>
-        <span className="ml-2 w-2 h-5 bg-green-400 animate-pulse"></span>
-      </div>
-    </motion.div>
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.3, duration: 0.8 }}
+              className="text-gray-400 text-base sm:text-lg mb-6 font-mono"
+            >
+              <div className="flex items-center mb-2 overflow-x-auto">
+                <span className="text-green-400 mr-2">$</span>
+                <span className="whitespace-nowrap">python --version</span>
+              </div>
+              <div className="text-cyan-300 ml-4">Python 3.11.4</div>
+              
+              <div className="flex items-center mt-4 mb-2 overflow-x-auto">
+                <span className="text-green-400 mr-2">$</span>
+                <span className="whitespace-nowrap">cat skills.txt | grep -E "python|react|firebase"</span>
+                <span className="ml-2 w-2 h-5 bg-green-400 animate-pulse"></span>
+              </div>
+            </motion.div>
 
-    <motion.p
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      transition={{ delay: 0.6, duration: 0.8 }}
-      className="text-gray-300 text-lg leading-relaxed"
-    >
-      I specialize in building full-stack applications with Python and modern web technologies. 
-      My toolkit includes everything from backend APIs to beautiful UIs.
-    </motion.p>
-  </div>
+            <motion.p
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ delay: 0.6, duration: 0.8 }}
+              className="text-gray-300 text-base sm:text-lg leading-relaxed"
+            >
+              I specialize in building full-stack applications with Python and modern web technologies. 
+              My toolkit includes everything from backend APIs to beautiful UIs.
+            </motion.p>
+          </div>
 
-  {/* Python Snake Animation */}
-  <motion.div
-    initial={{ opacity: 0 }}
-    whileInView={{ opacity: 1 }}
-    transition={{ delay: 0.9, duration: 1 }}
-    className="mt-8"
-  >
-    <SnakeGame />
-  </motion.div>
-</motion.div>
+          {/* Python Snake Animation */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.9, duration: 1 }}
+            className="mt-8"
+          >
+            <SnakeGame />
+          </motion.div>
+        </motion.div>
 
         {/* Right Column - Skills Cards */}
-        <div className="w-full lg:w-1/2">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="w-full lg:w-3/5 xl:w-1/2">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
             {categories.map((category, idx) => (
               <motion.div
                 key={category.title}
                 initial={{ opacity: 0, y: 20, scale: 0.95 }}
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
-                whileHover={{ y: -5 }}
+                whileHover={{ y: -3 }} // Reduced hover effect
                 transition={{ 
                   delay: idx * 0.15,
                   duration: 0.5,
@@ -119,42 +122,42 @@ export default function Skills() {
                   stiffness: 100
                 }}
                 viewport={{ once: true, margin: "-50px" }}
-                className={`bg-gradient-to-br ${category.color} rounded-xl shadow-lg overflow-hidden border border-gray-800/50 h-full`}
+                className={`bg-gradient-to-br ${category.color} rounded-xl shadow-lg overflow-hidden border border-gray-800/50`}
               >
-                <div className="p-6 backdrop-blur-sm bg-black/30 h-full flex flex-col">
-                  <div className="flex items-center gap-3 mb-4">
+                <div className="p-4 sm:p-5 backdrop-blur-sm bg-black/30 h-full flex flex-col">
+                  <div className="flex items-center gap-2 mb-2"> {/* Reduced gap and margin */}
                     {category.icon}
-                    <h3 className="text-xl font-mono font-semibold text-white">
+                    <h3 className="text-base sm:text-lg font-mono font-semibold text-white"> {/* Smaller text */}
                       {category.title}
                     </h3>
                   </div>
                   
-                  <ul className="space-y-2.5 mb-4">
+                  <ul className="space-y-1.5 mb-3"> {/* Tighter spacing */}
                     {category.skills.map((skill) => (
                       <motion.li 
                         key={skill}
                         initial={{ x: -10, opacity: 0 }}
                         whileInView={{ x: 0, opacity: 1 }}
                         transition={{ duration: 0.3 }}
-                        className="flex items-center text-gray-200 group"
+                        className="flex items-center text-gray-200 group text-xs sm:text-sm" // Smaller text
                       >
-                        <span className="mr-2 text-xs text-cyan-300">▹</span>
+                        <span className="mr-1.5 text-[10px] text-cyan-300">▹</span> {/* Smaller caret */}
                         <span className="group-hover:text-white transition-colors font-mono">
                           {skill}
                         </span>
-                        <span className="ml-auto text-xs opacity-0 group-hover:opacity-100 text-cyan-300 transition-opacity">
+                        <span className="ml-auto text-[10px] opacity-0 group-hover:opacity-100 text-cyan-300 transition-opacity">
                           {Math.floor(Math.random() * 90) + 10}%
                         </span>
                       </motion.li>
                     ))}
                   </ul>
 
-                  <div className="mt-auto bg-black/50 rounded-md p-3 font-mono text-xs overflow-hidden">
+                  <div className="mt-auto bg-black/50 rounded-md p-2 font-mono text-[11px] leading-tight overflow-x-auto"> {/* Smaller text and tighter leading */}
                     <motion.code
                       initial={{ opacity: 0 }}
                       whileInView={{ opacity: 1 }}
                       transition={{ delay: 0.4 }}
-                      className="text-gray-300 block"
+                      className="text-gray-300 block whitespace-pre"
                     >
                       {category.code}
                     </motion.code>
