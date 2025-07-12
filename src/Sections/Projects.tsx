@@ -268,6 +268,26 @@ export default function Projects() {
           ♥
         </motion.div>
       ))}
+      {/* Status bar at bottom */}
+      <motion.div 
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.5 }}
+        className="fixed bottom-0 left-0 right-0 bg-gray-900/80 border-t border-gray-800 py-2 px-4 flex justify-between items-center text-xs font-mono text-gray-400"
+      >
+        <div className="flex items-center gap-4">
+          <span>"def greet()"</span>
+          <span>TECH: {projects.reduce((acc, proj) => acc + proj.tech.length, 0)}</span>
+        </div>
+        <div className="flex items-center gap-2">
+          <motion.span
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="w-2 h-2 rounded-full bg-emerald-400"
+          />
+          <span>READY</span>
+        </div>
+      </motion.div>
     </section>
   );
 }
