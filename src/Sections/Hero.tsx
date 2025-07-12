@@ -110,89 +110,17 @@ export default function Hero() {
             </div>
             <div className="flex-1 p-4 text-sm overflow-x-auto whitespace-pre font-mono text-[#d4d4d4]">
               <code>
-{`import curses
-from random import randint
+{`class DreamCompiler:
+    def __init__(self):
+        self.status = "in progress"
 
-def main(stdscr):
-    # Setup
-    curses.curs_set(0)
-    sh, sw = stdscr.getmaxyx()
-    w = curses.newwin(sh, sw, 0, 0)
-    w.keypad(1)
-    w.timeout(100)
+    def build(self):
+        print("💡 Compiling big dreams...")
+        print("🔧 No errors found. Confidence ✅")
+        self.status = "manifested ✨"
 
-    # Initial snake position and food
-    snk_x = sw // 4
-    snk_y = sh // 2
-    snake = [
-        [snk_y, snk_x],
-        [snk_y, snk_x - 1],
-        [snk_y, snk_x - 2]
-    ]
-    food = [sh // 2, sw // 2]
-    w.addch(food[0], food[1], curses.ACS_PI)
-
-    # Initial direction
-    key = curses.KEY_RIGHT
-
-    while True:
-        next_key = w.getch()
-        key = key if next_key == -1 else next_key
-
-        head = [snake[0][0], snake[0][1]]
-        if key == curses.KEY_DOWN:
-            head[0] += 1
-        if key == curses.KEY_UP:
-            head[0] -= 1
-        if key == curses.KEY_LEFT:
-            head[1] -= 1
-        if key == curses.KEY_RIGHT:
-            head[1] += 1
-
-        if (
-            head in snake or
-            head[0] in [0, sh] or
-            head[1] in [0, sw]
-        ):
-            curses.endwin()
-            print("Game Over!")
-            quit()
-
-        snake.insert(0, head)
-
-        if head == food:
-            food = None
-            while food is None:
-                nf = [randint(1, sh - 2), randint(1, sw - 2)]
-                if nf not in snake:
-                    food = nf
-            w.addch(food[0], food[1], curses.ACS_PI)
-        else:
-            tail = snake.pop()
-            w.addch(tail[0], tail[1], ' ')
-
-        w.addch(snake[0][0], snake[0][1], curses.ACS_CKBOARD)
-
-if __name__ == "__main__":
-    curses.wrapper(main)
-
-"""
-Game Output:
-
-┌───────────────────────────────────────┐
-│                                       │
-│   ███                                  │
-│     █      π                           │
-│     █                                  │
-│     █                                  │
-│                                       │
-│                                       │
-│  Use arrow keys to control the snake  │
-│  Eat the food (π) to grow longer      │
-│  Don't hit walls or yourself!         │
-│                                       │
-└───────────────────────────────────────┘
-"""
+dev = DreamCompiler()
+dev.build()
 `}
               </code>
             </div>
