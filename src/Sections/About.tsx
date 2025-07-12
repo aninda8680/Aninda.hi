@@ -16,7 +16,7 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className=" min-h-screen w-screen flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
+    <section id="about" className=" min-h-screen w-full overflow-x-hidden flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
 
      
 

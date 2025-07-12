@@ -43,7 +43,7 @@ const categories = [
 
 export default function Skills() {
   return (
-    <section id="skills" className="min-h-screen w-full flex items-center bg-gray-950 overflow-hidden px-6 py-12">
+    <section id="skills" className="min-h-screen w-full overflow-x-hidden overflow-x-hidden flex items-center bg-gray-950 overflow-hidden px-6 py-12">
       <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-12">
         {/* Left Column - Text Content */}
 <motion.div 

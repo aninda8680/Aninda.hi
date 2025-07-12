@@ -32,7 +32,7 @@ export default function Hero() {
   return (
     <section
       id="hero"
-      className=" min-h-screen w-screen flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden"
+      className=" min-h-screen w-full overflow-x-hidden flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden"
     >
 
         <div className="max-w-7xl mx-auto px-4 min-h-screen flex flex-col md:flex-row items-center justify-between gap-8 py-12">

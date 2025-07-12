@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { motion } from "framer-motion";
-import { TerminalIcon } from "./icons"; // Adjust import based on your setup
+import { TerminalIcon } from "./icons";
 
 const GRID_SIZE = 20;
 const TILE_SIZE = 20;
@@ -9,8 +9,18 @@ type Position = { x: number; y: number };
 
 export const SnakeGame = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const [score, setScore] = useState(0);
   const [gameOver, setGameOver] = useState(false);
+  const [isFocused, setIsFocused] = useState(false);
+  const gameStateRef = useRef<{
+    snake: Position[];
+    food: Position;
+    dx: number;
+    dy: number;
+    currentScore: number;
+    resetGame: () => void;
+  } | null>(null);
 
   useEffect(() => {
     if (!canvasRef.current) return;
@@ -27,62 +37,45 @@ export const SnakeGame = () => {
     let gameLoop: NodeJS.Timeout;
     let currentScore = 0;
 
-    // Draw functions
     const drawSnake = () => {
-      ctx.fillStyle = "#4ade80";
-      snake.forEach((segment) => {
-        ctx.fillRect(
-          segment.x * TILE_SIZE,
-          segment.y * TILE_SIZE,
-          TILE_SIZE,
-          TILE_SIZE
-        );
-        ctx.strokeStyle = "#166534";
-        ctx.strokeRect(
-          segment.x * TILE_SIZE,
-          segment.y * TILE_SIZE,
-          TILE_SIZE,
-          TILE_SIZE
-        );
+      ctx.fillStyle = '#10b981';
+      snake.forEach(segment => {
+        ctx.fillRect(segment.x * TILE_SIZE, segment.y * TILE_SIZE, TILE_SIZE - 1, TILE_SIZE - 1);
       });
     };
 
     const drawFood = () => {
-      ctx.fillStyle = "#f87171";
-      ctx.beginPath();
-      ctx.arc(
-        food.x * TILE_SIZE + TILE_SIZE / 2,
-        food.y * TILE_SIZE + TILE_SIZE / 2,
-        TILE_SIZE / 2,
-        0,
-        Math.PI * 2
-      );
-      ctx.fill();
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(food.x * TILE_SIZE, food.y * TILE_SIZE, TILE_SIZE - 1, TILE_SIZE - 1);
     };
 
-    const moveSnake = () => {
-      const head: Position = { x: snake[0].x + dx, y: snake[0].y + dy };
+    const generateFood = () => {
+      food = {
+        x: Math.floor(Math.random() * GRID_SIZE),
+        y: Math.floor(Math.random() * GRID_SIZE)
+      };
+    };
+
+    const gameStep = () => {
+      if (gameOver) return;
+
+      const head = { x: snake[0].x + dx, y: snake[0].y + dy };
 
       // Check wall collision
-      if (
-        head.x < 0 ||
-        head.x >= GRID_SIZE ||
-        head.y < 0 ||
-        head.y >= GRID_SIZE
-      ) {
+      if (head.x < 0 || head.x >= GRID_SIZE || head.y < 0 || head.y >= GRID_SIZE) {
         setGameOver(true);
         return;
       }
 
       // Check self collision
-      if (snake.some((seg) => seg.x === head.x && seg.y === head.y)) {
+      if (snake.some(segment => segment.x === head.x && segment.y === head.y)) {
         setGameOver(true);
         return;
       }
 
       snake.unshift(head);
 
-      // Check if snake ate food
+      // Check food collision
       if (head.x === food.x && head.y === food.y) {
         currentScore += 10;
         setScore(currentScore);
@@ -90,53 +83,58 @@ export const SnakeGame = () => {
       } else {
         snake.pop();
       }
-    };
 
-    const generateFood = () => {
-      food = {
-        x: Math.floor(Math.random() * GRID_SIZE),
-        y: Math.floor(Math.random() * GRID_SIZE),
-      };
-
-      // Ensure food doesn't spawn on snake
-      while (snake.some((seg) => seg.x === food.x && seg.y === food.y)) {
-        food = {
-          x: Math.floor(Math.random() * GRID_SIZE),
-          y: Math.floor(Math.random() * GRID_SIZE),
-        };
-      }
-    };
-
-    const gameStep = () => {
-      if (gameOver) return;
+      // Clear canvas and redraw
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      moveSnake();
       drawSnake();
       drawFood();
     };
 
-    // Keyboard controls
+    const resetGame = () => {
+      snake = [{ x: 10, y: 10 }];
+      food = { x: 5, y: 5 };
+      dx = 1;
+      dy = 0;
+      currentScore = 0;
+      setScore(0);
+      setGameOver(false);
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawSnake();
+      drawFood();
+    };
+
+    // Store resetGame function in ref for external access
+    gameStateRef.current = { snake, food, dx, dy, currentScore, resetGame };
+
     const handleKeyDown = (e: KeyboardEvent) => {
-      switch (e.key) {
-        case "ArrowUp":
+      // Only handle keys when focused
+      if (!isFocused) return;
+      
+      // Prevent default behavior for arrow keys
+      if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.key)) {
+        e.preventDefault();
+      }
+
+      switch(e.key) {
+        case 'ArrowUp':
           if (dy !== 1) {
             dx = 0;
             dy = -1;
           }
           break;
-        case "ArrowDown":
+        case 'ArrowDown':
           if (dy !== -1) {
             dx = 0;
             dy = 1;
           }
           break;
-        case "ArrowLeft":
+        case 'ArrowLeft':
           if (dx !== 1) {
             dx = -1;
             dy = 0;
           }
           break;
-        case "ArrowRight":
+        case 'ArrowRight':
           if (dx !== -1) {
             dx = 1;
             dy = 0;
@@ -155,15 +153,12 @@ export const SnakeGame = () => {
       clearInterval(gameLoop);
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [gameOver]);
+  }, [gameOver, isFocused]);
 
-  const resetGame = () => {
-    setScore(0);
-    setGameOver(false);
-  };
+  // ... (keep rest of the component)
 
   return (
-    <motion.div
+    <motion.div 
       className="mt-8"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -171,7 +166,7 @@ export const SnakeGame = () => {
     >
       <div className="flex items-center gap-2 mb-4">
         <TerminalIcon className="w-5 h-5 text-green-400" />
-        <span className="text-green-400 font-mono">snake_game.tsx</span>
+        <span className="text-green-400 font-mono">python_snake.py</span>
       </div>
       <div className="bg-black/50 border border-green-400/30 rounded-lg p-4 font-mono text-sm text-green-300">
         {gameOver ? (
@@ -179,7 +174,7 @@ export const SnakeGame = () => {
             <p className="text-red-400 mb-2">Game Over!</p>
             <p className="mb-4">Score: {score}</p>
             <button
-              onClick={resetGame}
+              onClick={() => gameStateRef.current?.resetGame()}
               className="px-3 py-1 bg-green-700/50 border border-green-400/30 rounded hover:bg-green-600/50 transition"
             >
               Play Again
@@ -189,12 +184,22 @@ export const SnakeGame = () => {
           <>
             <div className="flex justify-between mb-2">
               <span>Score: {score}</span>
-              <span className="text-green-400/70">Use arrow keys to play</span>
+              <span className={`${isFocused ? 'text-green-400' : 'text-green-400/70'}`}>
+                {isFocused ? 'Playing...' : 'Click then use arrow keys'}
+              </span>
             </div>
-            <canvas
-              ref={canvasRef}
-              className="w-full h-40 bg-black/70 border border-green-400/20 rounded"
-            />
+            <div 
+              ref={containerRef}
+              tabIndex={0}
+              onFocus={() => setIsFocused(true)}
+              onBlur={() => setIsFocused(false)}
+              className="outline-none"
+            >
+              <canvas 
+                ref={canvasRef} 
+                className={`w-full h-40 bg-black/70 border ${isFocused ? 'border-green-400' : 'border-green-400/20'} rounded`}
+              />
+            </div>
           </>
         )}
       </div>
