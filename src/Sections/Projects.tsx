@@ -7,82 +7,87 @@ const projects = [
     title: "Club-Connect",
     description: "A club management platform for streamlined communication and events.",
     tech: ["React", "TypeScript", "Tailwind CSS", "Firebase"],
-    link: "#", // replace with actual link
+    link: "#",
   },
   {
     title: "Ornithopter Website",
     description: "A sleek product showcase site to present Ornithopter designs.",
     tech: ["React", "TypeScript"],
-    link: "#", // replace with actual link
+    link: "#",
   },
   {
     title: "Flashcard Quiz App",
     description: "A mobile quiz app built with Flutter to help you revise smarter.",
     tech: ["Flutter", "Dart"],
-    link: "#", // replace with actual link
+    link: "#",
   },
   {
     title: "Mouse Control with Hand",
     description: "An experimental project using hand gestures to control the mouse (details coming soon).",
     tech: ["TBD"],
-    link: "#", // placeholder
+    link: "#",
   },
 ];
 
 export default function Projects() {
   return (
-    <section id="projects" className=" min-h-screen w-full overflow-x-hidden flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
-      <motion.h1
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="text-4xl font-bold mb-8 text-center"
-      >
-        Projects
-      </motion.h1>
+    <section
+      id="projects"
+      className="min-h-screen w-full flex items-center justify-center px-6 py-12 bg-[#0a0a0a] text-green-400 font-mono"
+    >
+      <div className="w-full max-w-6xl">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-4xl sm:text-5xl font-bold mb-6 text-center text-green-500"
+        >
+          Projects
+        </motion.h1>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ delay: 0.3 }}
-        className="text-gray-700 text-center mb-10"
-      >
-        I build whatever pops into my head — ideas, experiments, and tools I vibe with.
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ delay: 0.3 }}
+          className="text-center text-green-300 mb-12 max-w-xl mx-auto text-sm sm:text-base"
+        >
+          I build whatever pops into my head — ideas, experiments, and tools I vibe with.
+        </motion.p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {projects.map((project, idx) => (
-          <motion.div
-            key={project.title}
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: idx * 0.1 }}
-            className="bg-white dark:bg-neutral-900 border border-gray-200 dark:border-neutral-700 rounded-2xl shadow-sm p-5 flex flex-col justify-between"
-          >
-            <div>
-              <h3 className="text-xl font-semibold mb-2">{project.title}</h3>
-              <p className="text-gray-600 dark:text-neutral-300 mb-3">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech) => (
-                  <span
-                    key={tech}
-                    className="text-sm px-2 py-1 bg-indigo-100 dark:bg-indigo-900/20 text-indigo-700 dark:text-indigo-300 rounded-full"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-            <a
-              href={project.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mt-auto inline-flex items-center gap-1 text-sm text-indigo-600 hover:underline"
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          {projects.map((project, idx) => (
+            <motion.div
+              key={project.title}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ delay: idx * 0.1 }}
+              className="bg-[#111111] border border-[#222] hover:border-green-500 rounded-xl p-5 shadow-md hover:shadow-green-600/10 transition duration-300 flex flex-col"
             >
-              View Project <ExternalLink className="w-4 h-4" />
-            </a>
-          </motion.div>
-        ))}
+              <div>
+                <h3 className="text-2xl font-bold text-green-400 mb-2">{project.title}</h3>
+                <p className="text-green-300 mb-4 text-sm">{project.description}</p>
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {project.tech.map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-xs px-2 py-1 bg-green-900/20 border border-green-800 text-green-400 rounded-full"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="mt-auto inline-flex items-center gap-1 text-green-300 hover:text-green-200 transition text-sm"
+              >
+                View Project <ExternalLink className="w-4 h-4" />
+              </a>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );
