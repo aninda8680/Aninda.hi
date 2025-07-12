@@ -62,7 +62,7 @@ const Navbar = () => {
 
       {/* Navbar */}
       <nav
-        className={`fixed top-0 left-0 w-full z-50 px-6 shadow-xl transition-all duration-300 ease-in-out
+        className={`fixed top-0 left-0 w-screen z-50 px-6 shadow-xl transition-all duration-300 ease-in-out
         ${scrolled ? 'bg-black/60 backdrop-blur-md py-2' : 'bg-transparent py-4'}`}
       >
         <div className="max-w-5xl mx-auto flex justify-between items-center">

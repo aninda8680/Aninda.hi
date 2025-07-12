@@ -16,11 +16,11 @@ export default function About() {
   ];
 
   return (
-    <section id="about" className=" min-h-screen max-w-screen overflow-x-hidden flex items-center justify-center px-6 py-4 bg-gray-950 overflow-hidden">
+    <section id="about" className=" min-h-screen w-full overflow-x-hidden flex items-center justify-center px-6 py-4 bg-gray-950 ">
 
      
 
-      <div className="max-w-7xl  grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+      <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
         {/* Left Column - About Me Heading and Whoami Box */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}

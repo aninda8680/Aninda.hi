@@ -4,7 +4,7 @@ import { Mail, Github, Linkedin } from "lucide-react";
 
 export default function Contact() {
   return (
-    <section id="contact" className="pt-20 max-w-3xl mx-auto p-4">
+    <section id="contact" className="overflow-x-hidden pt-20 w-full p-4">
       <motion.h1
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}

@@ -70,7 +70,7 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      className=" min-h-screen max-w-screen bg-black px-4 py-16 border-t border-gray-800/50 overflow-hidden"
+      className=" min-h-screen w-full overflow-x-hidden bg-black px-4 py-16 border-t border-gray-800/50 "
     >
       <div className="max-w-6xl mx-auto">
         {/* Terminal Header */}
