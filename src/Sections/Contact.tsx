@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Mail, Github, Linkedin, Send } from "lucide-react";
 import { useState } from "react";
-import emailjs from "emailjs-com";
+import emailjs from '@emailjs/browser';
 
 export default function ContactFooter() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
