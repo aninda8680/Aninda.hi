@@ -106,7 +106,7 @@ export default function Hero() {
                 <div className="w-3 h-3 rounded-full bg-[#ffbd2e]"></div>
                 <div className="w-3 h-3 rounded-full bg-[#27c93f]"></div>
               </div>
-              <div className="text-xs text-[#d4d4d4] ml-4">snake_game.py</div>
+              <div className="text-xs text-[#d4d4d4] ml-4">life.py</div>
             </div>
             <div className="flex-1 p-4 text-sm overflow-x-auto whitespace-pre font-mono text-[#d4d4d4]">
               <code>
