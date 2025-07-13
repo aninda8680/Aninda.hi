@@ -21,62 +21,56 @@ export default function About() {
      
 
       <div className="max-w-7xl w-full grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
-        {/* Left Column - About Me Heading and Whoami Box */}
+        {/* Left Column - Terminal-style bio */}
         <motion.div
           initial={{ opacity: 0, x: -50 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8 }}
           className="flex flex-col justify-center"
         >
-          {/* Animated title */}
-          <motion.div 
-            className="flex items-center gap-3 mb-8"
-            initial={{ opacity: 0, y: -20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <Cpu className="w-8 h-8 text-cyan-400 animate-pulse" />
-            <h1 className="text-4xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-500">
-              About Me
-            </h1>
-          </motion.div>
-
-          {/* Glowing animated border card */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.4, duration: 0.6 }}
-            className="relative p-[1px] rounded-xl bg-gradient-to-br from-cyan-500/30 to-purple-600/30 backdrop-blur-md"
-          >
-            <div className="bg-gray-900/80 rounded-xl p-8 backdrop-blur-sm h-full">
-              <motion.p
-                className="text-lg text-gray-300 leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-              >
-                <span className="font-mono text-cyan-400">$ whoami</span><br /><br />
-                Hey! I'm a <span className="font-semibold text-white">3rd year B.Tech CSE student</span> at{' '}
-                <span className="text-purple-400 font-medium">Adamas University</span>. Currently hacking on{' '}
-                <span className="text-cyan-400">Python</span>, building with{' '}
-                <span className="text-purple-400">Firebase</span>, and exploring{' '}
-                <span className="text-cyan-400">App Development</span>.
-              </motion.p>
-
-              <motion.div
-                className="mt-6 p-4 bg-gray-800/50 rounded-lg border-l-4 border-cyan-400"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ delay: 0.8 }}
-              >
-                <p className="text-gray-400 font-mono text-sm md:text-base">
-                  <span className="text-green-400">//</span> Passionate about solving complex problems<br />
-                  <span className="text-green-400">//</span> Love turning coffee into clean code<br />
-                  <span className="text-green-400">//</span> Always learning, always building
-                </p>
-              </motion.div>
+          {/* Terminal container with integrated header */}
+          <div className="bg-gray-900/90 rounded-lg border border-gray-800 overflow-hidden">
+            {/* Terminal header - now flush with body */}
+            <div className="flex items-center gap-2 p-3 bg-gray-900 border-b border-gray-800">
+              <div className="flex gap-2">
+                <div className="w-3 h-3 rounded-full bg-red-500"></div>
+                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                <div className="w-3 h-3 rounded-full bg-green-500"></div>
+              </div>
+              <span className="text-xs font-mono text-gray-400 ml-2">user@portfolio: ~/about</span>
             </div>
-          </motion.div>
+
+            {/* Terminal body - no gap between header */}
+            <div className="p-6 font-mono">
+              <div className="mb-4">
+                <p className="text-green-400">$ <span className="text-cyan-400">whoami</span></p>
+                <p className="text-gray-300 mt-2 ml-4">{"{"}</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"name"</span>: <span className="text-amber-300">"Your Name"</span>,</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"role"</span>: <span className="text-amber-300">"Developer"</span>,</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"education"</span>: <span className="text-amber-300">"B.Tech CSE @ Adamas University"</span>,</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"status"</span>: <span className="text-emerald-400">"Building cool stuff"</span></p>
+                <p className="text-gray-300 ml-4">{"}"}</p>
+              </div>
+
+              <div className="mb-4">
+                <p className="text-green-400">$ <span className="text-cyan-400">cat bio.txt</span></p>
+                <p className="text-gray-300 mt-2 ml-4">// 3rd year CS student passionate about solving</p>
+                <p className="text-gray-300 ml-4">// problems through code. Currently focused on:</p>
+                <p className="text-gray-300 ml-4">// - Python development</p>
+                <p className="text-gray-300 ml-4">// - Firebase applications</p>
+                <p className="text-gray-300 ml-4">// - Mobile development</p>
+              </div>
+
+              <div className="flex gap-4 mt-6">
+                <div className="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded-full border border-cyan-400/20">
+                  Always Learning
+                </div>
+                <div className="text-xs px-3 py-1 bg-purple-400/10 text-purple-400 rounded-full border border-purple-400/20">
+                  Problem Solver
+                </div>
+              </div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Right Column - Interest Cards */}
