@@ -39,7 +39,7 @@ export default function ContactFooter() {
   };
 
   return (
-    <footer className="w-full bg-gradient-to-br from-gray-950 to-gray-900 border-t border-gray-800 px-4 py-10">
+    <section id="contact" className="w-full bg-gradient-to-br from-gray-950 to-gray-900 border-t border-gray-800 px-4 py-10">
       <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-10 items-start">
         {/* Contact Form */}
         <motion.div
@@ -163,6 +163,6 @@ export default function ContactFooter() {
           </motion.p>
         </div>
       </div>
-    </footer>
+    </section>
   );
 }

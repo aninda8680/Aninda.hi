@@ -176,44 +176,59 @@ export default function Hero() {
           </motion.div>
 
           <motion.div variants={itemVariants} className="flex gap-4 flex-wrap">
-            <motion.button
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 0 10px rgba(130, 170, 255, 0.5)",
-                backgroundColor: "#1E3A8A"
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 rounded bg-[#1E3A8A] text-[#82AAFF] border border-[#1E3A8A] transition-all font-mono flex items-center group"
-            >
-              <span className="text-[#7FDBCA] mr-2">~$</span>
-              <span>view_projects()</span>
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="ml-2 opacity-0 group-hover:opacity-100"
-              >
-                ▸
-              </motion.span>
-            </motion.button>
+  {/* View Projects Button */}
+  <motion.button
+    whileHover={{ 
+      scale: 1.05,
+      boxShadow: "0 0 10px rgba(130, 170, 255, 0.5)",
+      backgroundColor: "#1E3A8A"
+    }}
+    whileTap={{ scale: 0.95 }}
+    onClick={() => {
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }}
+    className="px-6 py-3 rounded bg-[#1E3A8A] text-[#82AAFF] border border-[#1E3A8A] transition-all font-mono flex items-center group"
+  >
+    <span className="text-[#7FDBCA] mr-2">~$</span>
+    <span>view_projects()</span>
+    <motion.span
+      animate={{ x: [0, 5, 0] }}
+      transition={{ repeat: Infinity, duration: 1.5 }}
+      className="ml-2 opacity-0 group-hover:opacity-100"
+    >
+      ▸
+    </motion.span>
+  </motion.button>
 
-            <motion.button
-              whileHover={{ 
-                scale: 1.05,
-                boxShadow: "0 0 10px rgba(127, 219, 202, 0.3)",
-                backgroundColor: "#065F46"
-              }}
-              whileTap={{ scale: 0.95 }}
-              className="px-6 py-3 rounded bg-[#065F46] text-[#7FDBCA] border border-[#065F46] transition-all font-mono group"
-            >
-              <span className="text-[#82AAFF]">npm</span> run contact
-              <motion.span
-                animate={{ rotate: [0, 10, -10, 0] }}
-                transition={{ repeat: Infinity, duration: 1.5 }}
-                className="ml-2 opacity-0 group-hover:opacity-100 inline-block"
-              >
-                →
-              </motion.span>
-            </motion.button>
+  {/* Contact Button */}
+  <motion.button
+    whileHover={{ 
+      scale: 1.05,
+      boxShadow: "0 0 10px rgba(127, 219, 202, 0.3)",
+      backgroundColor: "#065F46"
+    }}
+    whileTap={{ scale: 0.95 }}
+    onClick={() => {
+      const contactSection = document.getElementById('contact');
+      if (contactSection) {
+        contactSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    }}
+    className="px-6 py-3 rounded bg-[#065F46] text-[#7FDBCA] border border-[#065F46] transition-all font-mono group"
+  >
+    <span className="text-[#82AAFF]">npm</span> run contact
+    <motion.span
+      animate={{ rotate: [0, 10, -10, 0] }}
+      transition={{ repeat: Infinity, duration: 1.5 }}
+      className="ml-2 opacity-0 group-hover:opacity-100 inline-block"
+    >
+      →
+    </motion.span>
+  </motion.button>
+
 
             <motion.button
               whileHover={{ 
