@@ -220,7 +220,7 @@ export default function Projects() {
         <div className="flex items-center gap-4">
           <span className="text-green-400">~/projects</span>
           <span>PROJECTS: {projects.length}</span>
-          <span>TECH: {projects.reduce((acc, proj) => acc + proj.tech.length, 0)}</span>
+          <span>by Aninda Debta</span>
         </div>
         <div className="flex items-center gap-2">
           <motion.span

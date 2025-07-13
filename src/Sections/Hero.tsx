@@ -137,7 +137,7 @@ export default function Hero() {
               <span className="text-[#7FDBCA]"> </span>
               <TypeAnimation
                 sequence={[
-                  'Full Stack Developer',
+                  'Android Developer',
                   1500,
                   'Python Enthusiast',
                   1500,

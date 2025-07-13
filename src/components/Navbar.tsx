@@ -66,16 +66,7 @@ const Navbar = () => {
           scrolled ? 'bg-white/5 backdrop-blur-md border-b border-white/5 py-2' : 'py-4'
         }`}
       >
-        <div className="max-w-6xl mx-auto px-6 flex justify-between items-center">
-          {/* Logo */}
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-lg font-medium text-white tracking-tight"
-          >
-            <span className="text-blue-400">A</span>ninda
-          </motion.div>
+        <div className="max-w-xl mx-auto  flex justify-between items-center">
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-1">
