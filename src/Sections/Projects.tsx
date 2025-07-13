@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "framer-motion";
-import { ExternalLink, Code, Terminal, Cpu, Binary, Heart, GitBranch, CpuIcon } from "lucide-react";
+import { ExternalLink, Code, Terminal, Cpu, Binary,  GitBranch } from "lucide-react";
 
 const projects = [
   {

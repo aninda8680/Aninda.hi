@@ -1,7 +1,7 @@
 
 
 import { motion } from 'framer-motion';
-import { Gamepad2, Camera, BookText, Sparkles, Code, Flame, Cpu, Terminal, Database, Smartphone } from 'lucide-react';
+import { Gamepad2, Camera, BookText, Sparkles, Code, Flame,  Terminal, Database, Smartphone } from 'lucide-react';
 
 export default function About() {
   const interests = [
