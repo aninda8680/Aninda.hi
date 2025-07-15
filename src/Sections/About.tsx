@@ -45,8 +45,8 @@ export default function About() {
               <div className="mb-4">
                 <p className="text-green-400">$ <span className="text-cyan-400">whoami</span></p>
                 <p className="text-gray-300 mt-2 ml-4">{"{"}</p>
-                <p className="text-gray-300 ml-6"><span className="text-purple-400">"name"</span>: <span className="text-amber-300">"Your Name"</span>,</p>
-                <p className="text-gray-300 ml-6"><span className="text-purple-400">"role"</span>: <span className="text-amber-300">"Developer"</span>,</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"name"</span>: <span className="text-amber-300">"Aninda Debta"</span>,</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"role"</span>: <span className="text-amber-300">"Coder"</span>,</p>
                 <p className="text-gray-300 ml-6"><span className="text-purple-400">"education"</span>: <span className="text-amber-300">"B.Tech CSE @ Adamas University"</span>,</p>
                 <p className="text-gray-300 ml-6"><span className="text-purple-400">"status"</span>: <span className="text-emerald-400">"Building cool stuff"</span></p>
                 <p className="text-gray-300 ml-4">{"}"}</p>
