@@ -1,42 +1,38 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
-import { CodeBracketIcon, TerminalIcon, DatabaseIcon, CpuChipIcon, PaintBrushIcon } from "../Sections/icons";
-import { SnakeGame } from "./SnakeGame";
+import { Terminal, CodeSquare, Database, Cpu, Palette, Code} from 'lucide-react';
+// The user requested to remove the SnakeGame import
+// import { SnakeGame } from "./SnakeGame"; 
 
 const categories = [
   {
     title: "Languages",
-    skills: ["Python", "Java"],
-    icon: <TerminalIcon className="w-4 h-4 text-green-500" />,
-    color: "border-green-500/30 hover:shadow-green-500/20",
+    skills: ["Python", "Java", "TypeScript"],
+    icon: <Terminal className="w-5 h-5 text-green-400" />,
     code: `print("Hello World!")`
   },
   {
     title: "Frontend",
-    skills: ["React", "Tailwind", "shadcn/ui"],
-    icon: <CodeBracketIcon className="w-4 h-4 text-blue-500" />,
-    color: "border-blue-500/30 hover:shadow-blue-500/20",
+    skills: ["React", "Tailwind CSS", "Next.js"],
+    icon: <CodeSquare className="w-5 h-5 text-cyan-400" />,
     code: `function App() {\n  return <h1>Hello</h1>;\n}`
   },
   {
-    title: "Backend",
-    skills: ["Firebase"],
-    icon: <DatabaseIcon className="w-4 h-4 text-purple-500" />,
-    color: "border-purple-500/30 hover:shadow-purple-500/20",
+    title: "Backend/DB",
+    skills: ["Firebase", "PostgreSQL", "Node.js"],
+    icon: <Database className="w-5 h-5 text-purple-400" />,
     code: `const firebaseConfig = {\n  // config\n};`
   },
   {
-    title: "Tools",
-    skills: ["Git", "VS Code", "Vercel"],
-    icon: <CpuChipIcon className="w-4 h-4 text-yellow-500" />,
-    color: "border-yellow-500/30 hover:shadow-yellow-500/20",
+    title: "DevOps/Tools",
+    skills: ["Git", "VS Code", "Vercel/Netlify"],
+    icon: <Cpu className="w-5 h-5 text-yellow-400" />,
     code: `git commit -m "update"`
   },
   {
-    title: "Extras",
-    skills: ["AI Tools", "Teamwork"],
-    icon: <PaintBrushIcon className="w-4 h-4 text-pink-500" />,
-    color: "border-pink-500/30 hover:shadow-pink-500/20",
+    title: "Design/UX",
+    skills: ["Figma", "UI/UX Principles", "Animation"],
+    icon: <Palette className="w-5 h-5 text-pink-400" />,
     code: `prompt = "Generate code"`
   },
 ];
@@ -70,255 +66,165 @@ export default function Skills() {
   return (
     <section 
       id="skills" 
-      className=" min-h-screen w-full overflow-x-hidden bg-black px-4 py-16 border-t border-gray-800/50 "
+      // FIX: Removed 'flex items-center justify-center' which was pushing content off-screen when the content height exceeded min-h-screen.
+      // Adjusted padding for better overall spacing.
+      className=" min-h-screen w-full overflow-x-hidden px-6 py-20 lg:py-32 bg-gray-950 border-t border-gray-800/50"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Terminal Header */}
-        <motion.div 
-          className="flex items-center gap-2 mb-8"
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+      {/* FIX: Added 'mx-auto' to ensure the max-width container is centered horizontally. */}
+      <div className="max-w-7xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 relative z-10">
+        
+        {/* Left Column - Terminal-style Skills Summary */}
+        <motion.div
+          initial={{ opacity: 0, x: -50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          className="flex flex-col justify-center"
         >
-          <motion.div 
-            className="flex gap-2"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            transition={{ 
-              staggerChildren: 0.1,
-              delayChildren: 0.2
-            }}
-          >
-            {["red", "yellow", "green"].map((color) => (
-              <motion.div
-                key={color}
-                className={`w-3 h-3 rounded-full bg-${color}-500`}
-                whileHover={{ scale: 1.2 }}
-                transition={{ type: "spring", stiffness: 400 }}
-              />
-            ))}
-          </motion.div>
-          <motion.span 
-            className="text-gray-400 font-mono text-sm"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-            skills_terminal
-          </motion.span>
-        </motion.div>
+          <div className="bg-gray-900/90 rounded-xl border border-gray-800 overflow-hidden shadow-2xl shadow-gray-950/50">
+            
+            {/* Terminal header */}
+            <div className="flex items-center gap-2 p-3 bg-gray-900 border-b border-gray-800">
+              <div className="flex gap-2">
+                {["red", "yellow", "green"].map((color) => (
+                  <div key={color} className={`w-3 h-3 rounded-full bg-${color}-500`}></div>
+                ))}
+              </div>
+              <span className="text-xs font-mono text-gray-400 ml-2">user@portfolio: ~/skills</span>
+            </div>
 
-        <div className="grid md:grid-cols-2 gap-8">
-          {/* Left Panel - Bio */}
-          <motion.div 
-            className="bg-gray-900/50 border border-gray-800 rounded-lg p-6 font-mono relative overflow-hidden"
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            {/* Animated cursor */}
-            <motion.div
-              className="absolute top-6 left-6 w-2 h-5 bg-green-400"
-              animate={{ opacity: [0, 1, 0] }}
-              transition={{ 
-                repeat: Infinity,
-                duration: 1.2,
-                ease: "easeInOut"
-              }}
-            />
-            
-            <motion.div 
-              className="text-green-400 mb-4"
-              variants={typingVariants}
-              initial="hidden"
-              whileInView="visible"
-            >
-              <span className="text-gray-500">$</span> cat about_me.txt
-            </motion.div>
-            
-            <motion.h1 
-              className="text-2xl sm:text-3xl font-bold text-white mb-4 flex flex-wrap"
-              variants={typingVariants}
-              initial="hidden"
-              whileInView="visible"
-            >
-              {title.split("").map((char, i) => (
-                <motion.span 
-                  key={i} 
-                  variants={letterVariants}
-                  whileHover={{ scale: 1.2, color: "#3b82f6" }}
-                  transition={{ type: "spring", stiffness: 400 }}
+            {/* Terminal body */}
+            <div className="p-6 font-mono">
+              <div className="mb-4">
+                <p className="text-green-400">$ <span className="text-cyan-400">echo "My Expertise"</span></p>
+                
+                <motion.h1 
+                  className="text-3xl font-bold text-white mb-4 flex flex-wrap mt-2 ml-4"
+                  variants={typingVariants}
+                  initial="hidden"
+                  whileInView="visible"
                 >
-                  {char}
-                </motion.span>
-              ))}
-            </motion.h1>
+                  {title.split("").map((char, i) => (
+                    <motion.span 
+                      key={i} 
+                      variants={letterVariants}
+                      whileHover={{ scale: 1.2, color: "#3b82f6" }}
+                      transition={{ type: "spring", stiffness: 400 }}
+                    >
+                      {char}
+                    </motion.span>
+                  ))}
+                </motion.h1>
+              </div>
 
-            <motion.div 
-              className="text-gray-300 space-y-4"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 0.8 }}
-            >
-              <p>
-                <span className="text-blue-400">//</span> Full-stack developer specializing in:
-              </p>
-              
-              <motion.div 
-                className="flex flex-wrap gap-2"
+              {/* Skills as JSON output */}
+              <div className="mb-4">
+                <p className="text-green-400">$ <span className="text-cyan-400">cat skills.json</span></p>
+                <p className="text-gray-300 mt-2 ml-4">{"{"}</p>
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"focus"</span>: <span className="text-amber-300">"Full-Stack Web Development"</span>,</p>
+                
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"core_stack"</span>: [</p>
+                <p className="text-gray-300 ml-8"><span className="text-emerald-400">"React/Next.js"</span>,</p>
+                <p className="text-gray-300 ml-8"><span className="text-emerald-400">"Python/Node.js"</span>,</p>
+                <p className="text-gray-300 ml-8"><span className="text-emerald-400">"Firebase/SQL"</span></p>
+                <p className="text-gray-300 ml-6">],</p>
+                
+                <p className="text-gray-300 ml-6"><span className="text-purple-400">"methodology"</span>: <span className="text-amber-300">"Clean Code & Performance"</span></p>
+                <p className="text-gray-300 ml-4">{"}"}</p>
+              </div>
+
+              {/* Blinking cursor at the end */}
+              <motion.div
+                className="mt-6 text-gray-500 text-sm font-mono flex items-center"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ 
-                  delay: 1,
-                  staggerChildren: 0.1,
-                }}
+                transition={{ delay: 1.5 }}
               >
-                {categories.flatMap(c => c.skills).map((skill, i) => (
-                  <motion.span 
-                    key={skill} 
-                    className="px-2 py-1 bg-gray-800 rounded text-xs text-gray-300 border border-gray-700"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    whileHover={{ 
-                      scale: 1.1,
-                      backgroundColor: "rgba(59, 130, 246, 0.2)",
-                      borderColor: "#3b82f6"
-                    }}
-                    transition={{ 
-                      delay: 1 + i * 0.05,
-                      type: "spring",
-                      stiffness: 500
-                    }}
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
+                <span>user@portfolio:~$</span>
+                <motion.div
+                  className="w-2 h-4 bg-cyan-400 ml-1"
+                  animate={{ opacity: [0, 1, 0] }}
+                  transition={{ repeat: Infinity, duration: 1.2 }}
+                ></motion.div>
               </motion.div>
+            </div>
+          </div>
+        </motion.div>
 
-              <p className="pt-4 border-t border-gray-800">
-                <span className="text-blue-400">//</span> Currently working with:
-                <motion.span 
-                  className="block text-green-400 mt-1"
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  transition={{ delay: 1.5 }}
-                >
-                  Python • React • Firebase
-                </motion.span>
-              </p>
-            </motion.div>
+        {/* Right Column - Skills Cards */}
+        <motion.div
+          className="flex flex-col justify-center"
+          initial={{ opacity: 0, x: 50 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h2 
+            className="text-2xl md:text-3xl font-bold text-gray-300 mb-6 flex items-center gap-2"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            <Code className="w-6 h-6 text-cyan-400" />
+            Skill Categories
+          </motion.h2>
 
-            <motion.div
-              className="mt-8"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              transition={{ delay: 1.8 }}
-            >
-              <SnakeGame />
-            </motion.div>
-          </motion.div>
-
-          {/* Right Panel - Skills */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-3 gap-4">
             <AnimatePresence>
               {categories.map((category, idx) => (
                 <motion.div
                   key={category.title}
-                  initial={{ opacity: 0, y: 20, scale: 0.9 }}
-                  whileInView={{ 
-                    opacity: 1, 
-                    y: 0, 
-                    scale: 1,
-                    transition: { 
-                      delay: idx * 0.15,
-                      type: "spring",
-                      stiffness: 300
-                    }
-                  }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4 + idx * 0.1, duration: 0.5 }}
                   whileHover={{ 
-                    y: -5,
-                    boxShadow: `0 10px 25px -5px var(--tw-shadow-color)`,
+                    y: -5, 
+                    scale: 1.05,
+                    // Adjusted shadow to use cyan for a cyberpunk/tech feel
+                    boxShadow: '0 10px 20px -5px rgba(34, 211, 238, 0.2)'
                   }}
-                  className={`bg-gray-900/50 border ${category.color} rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg`}
+                  // Using the reference card style
+                  className="bg-gray-900/70 border border-gray-800 p-4 rounded-lg hover:bg-gray-800/70 transition-all cursor-default group relative overflow-hidden"
                 >
-                  <div className="p-4 h-full flex flex-col">
-                    <motion.div 
-                      className="flex items-center gap-2 mb-3"
-                      whileHover={{ x: 5 }}
-                    >
-                      {category.icon}
-                      <h3 className="font-mono font-medium text-white">
+                  {/* Animated highlight on hover */}
+                  <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  
+                  <div className="relative z-10 h-full flex flex-col">
+                    <div className="flex items-center gap-2 mb-3">
+                      {/* Icon is already colored via props in categories array */}
+                      <div className="w-8 h-8 flex items-center justify-center rounded-full bg-gray-800/50 p-1 group-hover:bg-cyan-400/20 transition-colors">
+                          {category.icon}
+                      </div>
+                      <h3 className="font-mono font-medium text-white text-lg">
                         {category.title}
                       </h3>
-                    </motion.div>
+                    </div>
                     
-                    <ul className="space-y-2 mb-3">
+                    <ul className="space-y-1 mb-3 ml-2 text-sm text-gray-400">
                       {category.skills.map((skill) => (
-                        <motion.li 
+                        <li 
                           key={skill}
-                          initial={{ x: -10, opacity: 0 }}
-                          whileInView={{ x: 0, opacity: 1 }}
-                          whileHover={{ 
-                            x: 5,
-                            color: "#ffffff"
-                          }}
-                          transition={{ 
-                            type: "spring",
-                            stiffness: 300
-                          }}
-                          className="flex items-center text-gray-300 text-sm"
+                          className="flex items-center"
                         >
-                          <motion.span 
-                            className="text-green-500 mr-2"
-                            animate={{ rotate: [0, 10, 0] }}
-                            transition={{ 
-                              repeat: Infinity,
-                              repeatType: "mirror",
-                              duration: 2
-                            }}
-                          >
-                            ▹
-                          </motion.span>
+                          <span className="text-cyan-400 mr-2">/</span>
                           {skill}
-                        </motion.li>
+                        </li>
                       ))}
                     </ul>
 
-                    <motion.div 
-                      className="mt-auto bg-black/50 rounded p-2 overflow-x-auto"
-                      whileHover={{ scale: 1.02 }}
+                    {/* Code snippet at the bottom */}
+                    <div 
+                      className="mt-auto bg-black/50 rounded p-2 overflow-x-auto border border-gray-700/50"
                     >
-                      <motion.code
-                        className="text-gray-400 text-xs font-mono block"
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        transition={{ delay: 0.3 }}
+                      <code
+                        className="text-gray-400 text-xs font-mono block whitespace-pre"
                       >
                         {category.code}
-                      </motion.code>
-                    </motion.div>
+                      </code>
+                    </div>
                   </div>
                 </motion.div>
               ))}
             </AnimatePresence>
           </div>
-        </div>
-
-        {/* Status Bar */}
-        <motion.div 
-          className="mt-8 flex items-center justify-between text-xs text-gray-500 font-mono border-t border-gray-800 pt-3"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ delay: 2 }}
-        >
-          <motion.div
-            animate={{ opacity: [0.5, 1, 0.5] }}
-            transition={{ repeat: Infinity, duration: 2 }}
-          >
-            -- INSERT --
-          </motion.div>
-          <div>UTF-8</div>
-          <div>100%</div>
         </motion.div>
       </div>
     </section>
